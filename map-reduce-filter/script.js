@@ -43,7 +43,7 @@ const companies = [
 //2. FILTER → somente foundedOn < 1990
 //3. REDUCE → somar marketValue das sobreviventes
 
-const newCompanies = companies.map(company => {
+/* const newCompanies = companies.map(company => {
     const newPrice = company.marketValue * 1.1
     
 
@@ -69,4 +69,50 @@ const totalValue = oldCompanies.reduce((total, company) => {
 
 }, 0)
 
+ESSE É UM METODO QUE PEGA MAP, REDUCE E FILTER DE CADA VEZ. ABAIXO VAMOS FAZER ENCADEADO */
+
+
+const totalValue = companies
+    .map(company => {
+        const newPrice = company.marketValue * 1.1
+
+        const newCompany = {
+            name: company.name,
+            marketValue: newPrice,
+            CEO: company.CEO,
+            foundedOn: company.foundedOn
+        }
+
+        return newCompany
+    })
+    .filter(company => {
+        return company.foundedOn < 1990
+    })
+    .reduce((total, company) => {
+        return total + company.marketValue
+    }, 0)
+
 console.log(totalValue)
+
+/*
+    MAP + FILTER + REDUCE ENCADEADOS
+    Usando SPREAD OPERATOR (...company)
+
+    ...company copia todas as propriedades da empresa.
+    Depois sobrescrevemos apenas marketValue.
+
+    const totalValue = companies
+    .map(company => ({
+        ...company,
+        marketValue: company.marketValue * 1.1
+    }))
+    .filter(company => {
+        return company.foundedOn < 1990
+    })
+    .reduce((total, company) => {
+        return total + company.marketValue
+    }, 0)
+
+console.log(totalValue)
+*/
+
