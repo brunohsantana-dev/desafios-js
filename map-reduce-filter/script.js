@@ -116,3 +116,14 @@ console.log(totalValue)
 console.log(totalValue)
 */
 
+
+const marketValueAfterDrop = companies
+    .map(company => {
+        company.marketValue = company.marketValue * 0.9
+
+        return company
+    })
+    .filter(company => company.foundedOn > 1980)
+    .reduce((acc, company) => acc + company.marketValue, 0)
+
+console.log(marketValueAfterDrop)
