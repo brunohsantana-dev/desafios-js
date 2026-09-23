@@ -45,5 +45,28 @@ const companies = [
 
 const newCompanies = companies.map(company => {
     const newPrice = company.marketValue * 1.1
-    return newPrice 
+    
+
+const newCompany = {
+        name: company.name,
+        marketValue: newPrice,
+        CEO: company.CEO,
+        foundedOn: company.foundedOn
+    }
+
+    return newCompany
+
 })
+
+
+const oldCompanies = newCompanies.filter (company => {
+    return company.foundedOn < 1990  
+})
+
+
+const totalValue = oldCompanies.reduce((total, company) => {
+    return total + company.marketValue
+
+}, 0)
+
+console.log(totalValue)
